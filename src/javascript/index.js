@@ -1,16 +1,24 @@
+import React from 'react';
 import ReactDOM from 'react-dom';
-import immstruct from 'immstruct';
+import { Router, browserHistory } from 'react-router';
 
-import App from './app';
+import routes from './routes';
 
 
-let count = 0;
-let data = immstruct({ message: `hello world ${count}` });
+const el = document.getElementById('application');
+const { AppContainer } = require('react-hot-loader');
 
-let el = document.querySelector('#application');
-let render = () => ReactDOM.render(App({ message: data.cursor('message') }), el);
+const render = () => {
+  ReactDOM.render(
+    <AppContainer>
+      <Router history={ browserHistory } routes={ routes } />
+    </AppContainer>,
+    el
+  );
+};
 
 render();
-data.on('swap', render);
 
-setInterval(() => data.cursor().update('message', () => `hello world ${++count}`), 1000);
+if (module.hot) {
+  module.hot.accept('./routes', render);
+}

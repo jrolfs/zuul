@@ -4,13 +4,16 @@ const CopyWepbackPlugin = require('copy-webpack-plugin');
 
 
 module.exports = {
-  devtool: 'eval',
+  devtool: 'inline-source-maps',
   entry: [
     'react-hot-loader/patch',
     'webpack-dev-server/client?http://0.0.0.0:3000',
     'webpack/hot/only-dev-server',
     './src/javascript/index'
   ],
+  resolve: {
+    extensions: ['.js']
+  },
   output: {
     path: path.join(__dirname, '/build/'),
     filename: 'bundle.js',
@@ -18,6 +21,7 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
     new CopyWepbackPlugin([{ from: './src/assets' }])
   ],
   module: {
@@ -25,7 +29,11 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loaders: ['babel-loader']
+        loaders: ['babel-loader'],
+        query: {
+          presets: [['es2015', { modules: false }], 'react', 'stage-1'],
+          plugins: ['react-hot-loader/babel']
+        }
       }
     ]
   }
