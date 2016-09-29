@@ -12,7 +12,7 @@ module.exports = {
     './src/javascript/index'
   ],
   resolve: {
-    extensions: ['.js']
+    extensions: ['.js', '.jsx']
   },
   output: {
     path: path.join(__dirname, '/build/'),
@@ -27,7 +27,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         loaders: ['babel-loader'],
         query: {
