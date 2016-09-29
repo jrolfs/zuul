@@ -11,7 +11,7 @@ const { AppContainer } = require('react-hot-loader');
 const render = () => {
   ReactDOM.render(
     <AppContainer>
-      <Router history={ browserHistory } routes={ routes } />
+      <Router history={browserHistory} routes={routes} />
     </AppContainer>,
     el
   );
