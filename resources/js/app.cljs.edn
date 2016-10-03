@@ -1,0 +1,3 @@
+{:require  [zuul.app]
+ :init-fns [zuul.app/init]
+ :compiler-options {:asset-path "js/app.out"}}
