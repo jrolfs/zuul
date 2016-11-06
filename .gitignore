@@ -1,3 +1,4 @@
 node_modules/
 
 .nrepl-port
+.nrepl-history
